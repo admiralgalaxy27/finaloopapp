@@ -5,7 +5,7 @@ class App{
 	constructor(){
 	 	this.forms = [
 	 		{
-	 			
+	 			"id":1,
 	 			"Name" : "Lyn Berg",
 	 			"Age" : "18",
 	 			"Cellnumber" : "09324785149",
@@ -14,7 +14,7 @@ class App{
 	 			"Address" : "Toril, Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":2,
 	 			"Name" : "Adriel Ylarde",
 	 			"Age" : "20",
 	 			"Cellnumber" : "09218900858",
@@ -23,7 +23,7 @@ class App{
 	 			"Address" : "5-3 V. Mapa Extension, Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":3,
 	 			"Name" : "April Joy",
 	 			"Age" : "21",
 	 			"Cellnumber" : "09315487625",
@@ -32,7 +32,7 @@ class App{
 	 			"Address" : "Tugbok, Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":4,
 	 			"Name" : "Carl Buenaluz",
 	 			"Age" : "16",
 	 			"Cellnumber" : "09354865798",
@@ -41,7 +41,7 @@ class App{
 	 			"Address" : "Calinan, Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":5,
 	 			"Name" : "Angelo Pereira",
 	 			"Age" : "25",
 	 			"Cellnumber" : "09325481654",
@@ -50,7 +50,7 @@ class App{
 	 			"Address" : "City of Tagum"
 	 		},
 	 		{
-	 			
+	 			"id":6,
 	 			"Name" : "Dboy Juaban",
 	 			"Age" : "25",
 	 			"Cellnumber" : "09325481654",
@@ -59,7 +59,7 @@ class App{
 	 			"Address" : "Sasa, Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":7,
 	 			"Name" : "Ceasar Lubaton",
 	 			"Age" : "24",
 	 			"Cellnumber" : "09325481654",
@@ -68,7 +68,7 @@ class App{
 	 			"Address" : "Magallanes,Davao City"
 	 		},
 	 		{
-	 			
+	 			"id":8,
 	 			"Name" : "Reyman Caumanday",
 	 			"Age" : "23",
 	 			"Cellnumber" : "09325481654",
@@ -77,7 +77,7 @@ class App{
 	 			"Address" : "Tagum City"
 	 		},
 	 		{
-	 			
+	 			"id":9,
 	 			"Name" : "Deo Dexter Guillermo",
 	 			"Age" : "23",
 	 			"Cellnumber" : "09325481654",
@@ -86,7 +86,7 @@ class App{
 	 			"Address" : "Marbel"
 	 		},
 	 		{
-	 			
+	 			"id":10,
 	 			"Name" : "CJ Polpol",
 	 			"Age" : "23",
 	 			"Cellnumber" : "09325481654",
@@ -150,7 +150,7 @@ class App{
 		let a = document.getElementById('updateAddress');
 
 		let f = this.forms[key];
-		let form = {"id":f.id,"Name":n.value,"Age":e.value,"Cellnumber":c.value,"Picture":p.value,"Birthmonth":b.value,"Address":a.value};
+		let form = {"Name":n.value,"Age":e.value,"Cellnumber":c.value,"Picture":p.value,"Birthmonth":b.value,"Address":a.value};
 
 		this.forms[key] = form;
 		let details = document.getElementById('formDetails');
@@ -159,6 +159,28 @@ class App{
 		this.formListInfo();
 		this.showFormList();
 	}
+
+    SearchFormById(id){
+      let f = this.form;
+      for(let i=0;i<f.length;i++){
+        if(id==f[i].id){
+          return f[i];
+        }
+      }
+    } 
+
+    SearchForm(name){
+      let objects = [];
+      let f = this.form;
+      for(let i=0;i<f.length;i++){
+        let expr = (f[i].name.toUpperCase().indexOf(name.toUpperCase()) > -1);
+        if(expr){
+          objects.push(f[i]);
+        }
+      }
+      return objects;
+    }
+
 }
 
 
@@ -241,11 +263,19 @@ class Component extends App{
 							<div class="form-group">
 							    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
 							    <div class="input-group">
-							      <div class="input-group-addon">
-									<i class="material-icons">&#xE87C;</i>
 							      </div>
-							      <input type="text" class="form-control" placeholder="Search">
+							      <input type="text" class="form-control" placeholder="Search for...">
+							       <span class="input-group-btn">
+        							<button class="btn btn-secondary" type="button">Go!</button>
+      								</span>
 							    </div>
+							    <div class="container">
+    							<div class="row">
+    							<div class="alert alert-info">
+            					</div>
+           						 <div class="alert alert-success">
+               					 <strong>Your Result!</strong> <span id="showSearchTerm"></span>
+            					</div>
 							  </div>
 							<tbody id="formListInfo"></tbody>
 						</table>
@@ -357,13 +387,14 @@ class Component extends App{
 		this.reRender(
 			`
 				<h4 class="media-heading">${this.forms[key].Name}</h4>
-		       Age: <input id="updateAge" type="text" value="${this.forms[key].Age}" /><br/>
+		       	Age: <input id="updateAge" type="text" value="${this.forms[key].Age}" /><br/>
 				Cellnumber: <input id="updateCellnumber" type="text" value="${this.forms[key].Cellnumber}" /><br/>
 				Birthmonth: <input id="updateBirthmonth" type="text" value="${this.forms[key].Birthmonth}" /><br/>
 				Address: <input id="updateAddress" type="text" value="${this.forms[key].Address}" /><br/>
 				<button class="btn btn-success" onclick="component.updateForm(${key})">Save</button>
 			`,document.getElementById('formDetailsInfo'));
 	}
+	
 }
 
 let component = new Component();
