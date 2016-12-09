@@ -356,7 +356,7 @@ class Component extends App{
 	formUpdate(key){
 		this.reRender(
 			`
-				<h4 class="media-heading">${this.form[key].Name}</h4>
+				<h4 class="media-heading">${this.forms[key].Name}</h4>
 		       Age: <input id="updateAge" type="text" value="${this.forms[key].Age}" /><br/>
 				Cellnumber: <input id="updateCellnumber" type="text" value="${this.forms[key].Cellnumber}" /><br/>
 				Birthmonth: <input id="updateBirthmonth" type="text" value="${this.forms[key].Birthmonth}" /><br/>
