@@ -330,8 +330,8 @@ class Component extends App{
 						Cellnumber: ${this.forms[key].Cellnumber}<br/>
 						Birthmonth: ${this.forms[key].Birthmonth}<br/>
 						Address: ${this.forms[key].Address}<br/>
-						<button class="btn btn-success" onclick="component.formUpdate(${key})">Edit</button>
-						<button class="btn btn-danger" onclick="component.deleteForm(${key})">Remove</button>
+						<button class="btn btn-success" onclick="component.formUpdate(${key})">Update</button>
+						<button class="btn btn-danger" onclick="component.deleteForm(${key})">Delete</button>
 						<button class="btn btn-info" onclick="component.showFormList()">Back</button>
 					</div>	
 				</div>			
