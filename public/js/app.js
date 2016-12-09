@@ -150,7 +150,7 @@ class App{
 		let a = document.getElementById('updateAddress');
 
 		let f = this.forms[key];
-		let form = {"Name":n.value,"Age":e.value,"Cellnumber":c.value,"Picture":p.value,"Birthmonth":b.value,"Address":a.value};
+		let form = {"Name":f.value,"Age":e.value,"Cellnumber":c.value,"Picture":f.value,"Birthmonth":b.value,"Address":a.value};
 
 		this.forms[key] = form;
 		let details = document.getElementById('formDetails');
